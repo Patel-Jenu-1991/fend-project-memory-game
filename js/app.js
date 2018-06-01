@@ -3,14 +3,14 @@
  */
 
 let cards = [
-  "fa-diamond",
-  "fa-paper-plane-o",
-  "fa-anchor",
-  "fa-bolt",
-  "fa-cube",
-  "fa-leaf",
-  "fa-bicycle",
-  "fa-bomb"
+  "fa-diamond", "fa-diamond",
+  "fa-paper-plane-o", "fa-paper-plane-o",
+  "fa-anchor", "fa-anchor",
+  "fa-bolt", "fa-bolt",
+  "fa-cube", "fa-cube",
+  "fa-leaf", "fa-leaf",
+  "fa-bicycle", "fa-bicycle",
+  "fa-bomb", "fa-bomb"
 ];
 
 // grab the deck
@@ -33,11 +33,7 @@ function generateCards(cards) {
 
   // iterate over each card in the cards array
   for (const card of cards) {
-    // create a pair of cards for each card in turn
-    // and append it to the fragment
-    for (let i = 0; i < 2; i++) {
-      fragment.appendChild(createCard(card));
-    }
+    fragment.appendChild(createCard(card));
   }
 
   // return the fragment of generated cards
@@ -49,11 +45,14 @@ function generateCards(cards) {
 function createCard(card) {
   // returns card HTML for each given card
 
-  // create the listItem and set its attribute node
+  // create the listItem and set its attribute nodes
   let listItem = document.createElement("li"),
-      attr = document.createAttribute("class");
+      attr = document.createAttribute("class"),
+      type = document.createAttribute("data-card-type");
   attr.value = "card";
+  type.value = `${card}`;
   listItem.setAttributeNode(attr);
+  listItem.setAttributeNode(type);
 
   // create the icon element and set its attribute node
   let icon = document.createElement("i"),
@@ -88,7 +87,7 @@ function shuffle(array) {
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another
  *    function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality
+ *  - add the card to a *list* of "open" cards (put this functionality  --> CONTINUE HERE...
  *    in another function that you call from this one)
  *  - if the list already has another card, check to see if the two cards match
  *    + if the cards do match, lock the cards in the open position (put this
@@ -101,3 +100,75 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score
  *      (put this functionality in another function that you call from this one)
  */
+
+// array to work with list of open cards
+let openCards = [];
+
+// TODO: write an event listener for the deck
+deck.addEventListener("click", function (event) {
+  let target = event.target;
+  // console.log(openCards);
+  displayCard(target);
+  addCard(target, openCards);
+  if (openCards.length == 2) {
+    // check if the cards match
+    if (matchCards(openCards)) {
+      // match found, lock the cards in open position
+      setTimeout(function () {
+        lockCards(openCards);
+        emptyList(openCards);
+      }, 100);
+    } else {
+      // match not found, hide cards, empty list of open cards
+      setTimeout(function () {
+        hideCards(openCards);
+        emptyList(openCards);
+      }, 100);
+    }
+  }
+});
+
+// TODO: write a function to display card
+
+function displayCard(card) {
+  if (card && card.nodeName == "LI") {
+    card.classList.add("open", "show");
+  }
+}
+
+// TODO: write a function to add open cards to the list of openCards
+function addCard(card, list) {
+  list.push(card);
+}
+
+// TODO: write a function to match cards
+function matchCards(list) {
+  let cardTypes = [];
+  for (const card of list) {
+    cardTypes.push(card.getAttribute("data-card-type"));
+  }
+
+  return (cardTypes[0] === cardTypes[1]);
+}
+
+// TODO: write a function to lock the cards in open position
+function lockCards(list) {
+  for (const card of list) {
+    card.classList.remove("open", "show");
+    card.classList.add("match");
+  }
+}
+
+// TODO: write a function to hide cards
+function hideCards(list) {
+  for (const card of list) {
+    card.classList.remove("open", "show");
+  }
+}
+
+// TODO: write a function to empty the list of open cards
+function emptyList(list) {
+  while (list.length > 0) {
+    list.pop();
+  }
+}
