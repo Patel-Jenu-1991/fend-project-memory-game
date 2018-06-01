@@ -15,6 +15,8 @@ let cards = [
 
 // grab the deck
 const deck = document.querySelector("ul.deck");
+// get me the restart button
+const restart = document.querySelector("div.restart");
 
 /*
  * Display the cards on the page
@@ -23,8 +25,7 @@ const deck = document.querySelector("ul.deck");
  *   - add each card's HTML to the page
  */
 
-// preparing deck..., shuffle cards on the fly
-deck.appendChild(generateCards(shuffle(cards)));
+initGame();
 
 // TODO: write a function to generate the cards
 
@@ -104,7 +105,15 @@ function shuffle(array) {
 // array to work with list of open cards
 let openCards = [];
 
-// TODO: write an event listener for the deck
+// TODO: write an event handler for the restart button
+restart.addEventListener("click", function () {
+  // clear the deck
+  clearDeck();
+  // reinitialize game using the same function to initialize our game
+  initGame();
+});
+
+// TODO: write an event handler for the deck
 deck.addEventListener("click", function (event) {
   let target = event.target;
   // console.log(openCards);
@@ -127,6 +136,19 @@ deck.addEventListener("click", function (event) {
     }
   }
 });
+
+// TODO: write a function to initialize Game
+function initGame() {
+  // preparing deck..., shuffle cards on the fly
+  deck.appendChild(generateCards(shuffle(cards)));
+}
+
+// TODO: write a function to clear the deck
+function clearDeck() {
+  while (deck.firstElementChild != null) {
+    deck.firstElementChild.remove();
+  }
+}
 
 // TODO: write a function to display card
 
