@@ -131,14 +131,18 @@ deck.addEventListener("click", function (event) {
         lockCards(openCards);
         emptyList(openCards);
       }, 100);
-      updateMoves();
+      if (target && target.nodeName == "LI") {
+        updateMoves();
+      }
     } else {
       // match not found, hide cards, empty list of open cards
       setTimeout(function () {
         hideCards(openCards);
         emptyList(openCards);
       }, 100);
-      updateMoves();
+      if (target && target.nodeName == "LI") {
+        updateMoves();
+      }
     }
   }
 });
@@ -202,16 +206,32 @@ function emptyList(list) {
 }
 
 // TODO: write a function to keep track of the moves and display it on the page
-// half star: fa-star-half-full, full star empty: fa-star-o
 
 function updateMoves() {
   moveCounter++;
   moves.textContent = '';
   moves.textContent = moveCounter;
+  updateStars();
 }
 
 // TODO: write a function to reset moves in the score panel
 function resetMoves() {
   moveCounter = 0;
   moves.textContent = '0';
+}
+
+// TODO: write a function to update the stars
+// half star: fa-star-half-full, full star empty: fa-star-o
+
+function updateStars() {
+  const starOne = document.getElementById("star-two");
+  const starTwo = document.getElementById("star-three");
+  if (moveCounter % 8 === 0) {
+    starTwo.classList.remove("fa-star");
+    starTwo.classList.add("fa-star-o");
+    if (moveCounter > 8) {
+      starOne.classList.remove("fa-star");
+      starOne.classList.add("fa-star-o");
+    }
+  }
 }
