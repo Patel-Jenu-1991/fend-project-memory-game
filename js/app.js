@@ -17,6 +17,8 @@ let cards = [
 const deck = document.querySelector("ul.deck");
 // get me the restart button
 const restart = document.querySelector("div.restart");
+// select span.moves to update the moves
+const moves = document.querySelector("span.moves");
 
 /*
  * Display the cards on the page
@@ -102,11 +104,13 @@ function shuffle(array) {
  *      (put this functionality in another function that you call from this one)
  */
 
-// array to work with list of open cards
-let openCards = [];
+// array to work with list of open cards, move counter
+let openCards = [], moveCounter = 0;
 
 // TODO: write an event handler for the restart button
 restart.addEventListener("click", function () {
+  // reset Moves
+  resetMoves();
   // clear the deck
   clearDeck();
   // reinitialize game using the same function to initialize our game
@@ -127,12 +131,14 @@ deck.addEventListener("click", function (event) {
         lockCards(openCards);
         emptyList(openCards);
       }, 100);
+      updateMoves();
     } else {
       // match not found, hide cards, empty list of open cards
       setTimeout(function () {
         hideCards(openCards);
         emptyList(openCards);
       }, 100);
+      updateMoves();
     }
   }
 });
@@ -193,4 +199,19 @@ function emptyList(list) {
   while (list.length > 0) {
     list.pop();
   }
+}
+
+// TODO: write a function to keep track of the moves and display it on the page
+// half star: fa-star-half-full, full star empty: fa-star-o
+
+function updateMoves() {
+  moveCounter++;
+  moves.textContent = '';
+  moves.textContent = moveCounter;
+}
+
+// TODO: write a function to reset moves in the score panel
+function resetMoves() {
+  moveCounter = 0;
+  moves.textContent = '0';
 }
