@@ -111,6 +111,8 @@ let openCards = [], moveCounter = 0;
 restart.addEventListener("click", function () {
   // reset Moves
   resetMoves();
+  // reset stars
+  resetStars();
   // clear the deck
   clearDeck();
   // reinitialize game using the same function to initialize our game
@@ -131,18 +133,14 @@ deck.addEventListener("click", function (event) {
         lockCards(openCards);
         emptyList(openCards);
       }, 100);
-      if (target && target.nodeName == "LI") {
-        updateMoves();
-      }
+      updateMoves(target);
     } else {
       // match not found, hide cards, empty list of open cards
       setTimeout(function () {
         hideCards(openCards);
         emptyList(openCards);
       }, 100);
-      if (target && target.nodeName == "LI") {
-        updateMoves();
-      }
+      updateMoves(target);
     }
   }
 });
@@ -207,10 +205,12 @@ function emptyList(list) {
 
 // TODO: write a function to keep track of the moves and display it on the page
 
-function updateMoves() {
-  moveCounter++;
-  moves.textContent = '';
-  moves.textContent = moveCounter;
+function updateMoves(target) {
+  if (target && target.nodeName == "LI") {
+    moveCounter++;
+    moves.textContent = '';
+    moves.textContent = moveCounter;
+  }
   updateStars();
 }
 
@@ -220,18 +220,32 @@ function resetMoves() {
   moves.textContent = '0';
 }
 
+// TODO: write a function to reset stars
+function resetStars() {
+  const stars = document.querySelector(".stars");
+  stars.innerHTML = '';
+  stars.innerHTML = `<li><i class="fa fa-star"></i></li>
+  <li><i id="star-two" class="fa fa-star"></i></li>
+  <li><i id="star-three" class="fa fa-star"></i></li>`;
+}
+
 // TODO: write a function to update the stars
 // half star: fa-star-half-full, full star empty: fa-star-o
 
 function updateStars() {
   const starOne = document.getElementById("star-two");
   const starTwo = document.getElementById("star-three");
-  if (moveCounter % 8 === 0) {
+  if (moveCounter === 4) {
     starTwo.classList.remove("fa-star");
+    starTwo.classList.add("fa-star-half-full");
+  } else if (moveCounter === 8) {
+    starTwo.classList.remove("fa-star-half-full");
     starTwo.classList.add("fa-star-o");
-    if (moveCounter > 8) {
-      starOne.classList.remove("fa-star");
-      starOne.classList.add("fa-star-o");
-    }
+  } else if (moveCounter === 12) {
+    starOne.classList.remove("fa-star");
+    starOne.classList.add("fa-star-half-full");
+  } else if (moveCounter === 16) {
+    starOne.classList.remove("fa-star-half-full");
+    starOne.classList.add("fa-star-o");
   }
 }
