@@ -125,6 +125,13 @@ deck.addEventListener("click", function (event) {
   // console.log(openCards);
   displayCard(target);
   addCard(target, openCards);
+  gamePlay(target, openCards);
+});
+
+isWinner();
+
+// TODO: write a game play function to handle the game play
+function gamePlay(target, openCards) {
   if (openCards.length == 2) {
     // check if the cards match
     if (matchCards(openCards)) {
@@ -143,7 +150,7 @@ deck.addEventListener("click", function (event) {
       updateMoves(target);
     }
   }
-});
+}
 
 // TODO: write a function to initialize Game
 function initGame() {
@@ -247,5 +254,15 @@ function updateStars() {
   } else if (moveCounter === 16) {
     starOne.classList.remove("fa-star-half-full");
     starOne.classList.add("fa-star-o");
+  }
+}
+
+// TODO: write a function to check for a win win situation
+function isWinner() {
+  const matchedCards = document.querySelectorAll(".match");
+  if (matchedCards.length === 16) {
+    alert("Congratulations! You Win!!");
+  } else {
+    return false;
   }
 }
