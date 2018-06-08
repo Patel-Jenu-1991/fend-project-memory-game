@@ -128,8 +128,6 @@ deck.addEventListener("click", function (event) {
   gamePlay(target, openCards);
 });
 
-isWinner();
-
 // TODO: write a game play function to handle the game play
 function gamePlay(target, openCards) {
   if (openCards.length == 2) {
@@ -150,6 +148,7 @@ function gamePlay(target, openCards) {
       updateMoves(target);
     }
   }
+  setTimeout(isWinner, 100);
 }
 
 // TODO: write a function to initialize Game
@@ -168,7 +167,7 @@ function clearDeck() {
 // TODO: write a function to display card
 
 function displayCard(card) {
-  if (card && card.nodeName == "LI") {
+  if (card && card.nodeName === "LI") {
     card.classList.add("open", "show");
   }
 }
@@ -213,7 +212,7 @@ function emptyList(list) {
 // TODO: write a function to keep track of the moves and display it on the page
 
 function updateMoves(target) {
-  if (target && target.nodeName == "LI") {
+  if (target && target.nodeName === "LI") {
     moveCounter++;
     moves.textContent = '';
     moves.textContent = moveCounter;
@@ -259,10 +258,9 @@ function updateStars() {
 
 // TODO: write a function to check for a win win situation
 function isWinner() {
-  const matchedCards = document.querySelectorAll(".match");
+  let matchedCards = document.querySelectorAll(".match");
+  console.log(matchedCards.length);
   if (matchedCards.length === 16) {
     alert("Congratulations! You Win!!");
-  } else {
-    return false;
   }
 }
