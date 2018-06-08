@@ -261,6 +261,36 @@ function isWinner() {
   let matchedCards = document.querySelectorAll(".match");
   console.log(matchedCards.length);
   if (matchedCards.length === 16) {
-    alert("Congratulations! You Win!!");
+    displayModal("block");
   }
+}
+
+// TODO: implement modal dialgoue box
+
+// Get the modal
+const modal = document.getElementById("congrats-dialogue");
+// Get the <span> element that closes the modal
+const closeButton = document.querySelector(".close-button");
+// Get the modal close button to close the dialogue
+const modalCloseBtn = document.getElementById("modal-close-btn");
+
+// When the user clicks on <span> (x), close the modal
+closeButton.addEventListener("click", function() {
+  displayModal("none");
+});
+
+// When the user clicks on dialogue Close button, close the modal
+modalCloseBtn.addEventListener("click", function() {
+  displayModal("none");
+});
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function(event) {
+  if (event.target == modal) {
+    displayModal("none");
+  }
+});
+
+function displayModal(display) {
+  modal.style.display = display;
 }
