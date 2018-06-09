@@ -14,11 +14,13 @@ let cards = [
 ];
 
 // grab the deck
-const deck = document.querySelector("ul.deck");
+let deck = document.querySelector("ul.deck");
 // get me the restart button
-const restart = document.querySelector("div.restart");
+let restart = document.querySelector("div.restart");
 // select span.moves to update the moves
-const moves = document.querySelector("span.moves");
+let moves = document.querySelector("span.moves");
+// select stars from score panel
+let stars = document.querySelector(".stars");
 
 /*
  * Display the cards on the page
@@ -122,7 +124,6 @@ restart.addEventListener("click", function () {
 // TODO: write an event handler for the deck
 deck.addEventListener("click", function (event) {
   let target = event.target;
-  // console.log(openCards);
   displayCard(target);
   addCard(target, openCards);
   gamePlay(target, openCards);
@@ -228,7 +229,6 @@ function resetMoves() {
 
 // TODO: write a function to reset stars
 function resetStars() {
-  const stars = document.querySelector(".stars");
   stars.innerHTML = '';
   stars.innerHTML = `<li><i class="fa fa-star"></i></li>
   <li><i id="star-two" class="fa fa-star"></i></li>
@@ -259,7 +259,6 @@ function updateStars() {
 // TODO: write a function to check for a win win situation
 function isWinner() {
   let matchedCards = document.querySelectorAll(".match");
-  console.log(matchedCards.length);
   if (matchedCards.length === 16) {
     displayModal("block");
   }
@@ -268,11 +267,11 @@ function isWinner() {
 // TODO: implement modal dialgoue box
 
 // Get the modal
-const modal = document.getElementById("congrats-dialogue");
+let modal = document.getElementById("congrats-dialogue");
 // Get the <span> element that closes the modal
-const closeButton = document.querySelector(".close-button");
+let closeButton = document.querySelector(".close-button");
 // Get the modal close button to close the dialogue
-const modalCloseBtn = document.getElementById("modal-close-btn");
+let modalCloseBtn = document.getElementById("modal-close-btn");
 
 // When the user clicks on <span> (x), close the modal
 closeButton.addEventListener("click", function() {
@@ -291,6 +290,20 @@ window.addEventListener("click", function(event) {
   }
 });
 
+// Handle modal display
 function displayModal(display) {
+  if (display === "block") {
+    gameStats();
+  }
   modal.style.display = display;
+}
+
+function gameStats() {
+  let movesPlaceholder = document.getElementById("moves-placeholder");
+  // let timePlaceholder = document.getElementById("time-placeholder");
+  // let starsPlaceholder = document.getElementById("stars-placeholder");
+  // let stars = document.querySelector(".stars").innerHTML;
+  movesPlaceholder.textContent = moves.textContent;
+  // starsPlaceholder.innerHTML = stars;
+  // starsPlaceholder.style.listStyle = "none";
 }
