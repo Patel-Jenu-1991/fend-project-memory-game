@@ -303,9 +303,20 @@ function displayModal(display) {
 function gameStats() {
   let movesPlaceholder = document.getElementById("moves-placeholder");
   // let timePlaceholder = document.getElementById("time-placeholder");
-  // let starsPlaceholder = document.getElementById("stars-placeholder");
-  // let stars = document.querySelector(".stars").innerHTML;
+  getStars();
   movesPlaceholder.textContent = moves.textContent;
-  // starsPlaceholder.innerHTML = stars;
-  // starsPlaceholder.style.listStyle = "none";
+}
+
+function getStars() {
+  let starsPlaceholder = document.getElementById("stars-placeholder");
+  let stars = document.querySelectorAll(".stars li");
+  let fragment = document.createDocumentFragment();
+  let uList = document.createElement("ul");
+  for (star of stars) {
+    star.style.display = "inline";
+    fragment.appendChild(star);
+  }
+  uList.style.cssText = "list-style-type:none;margin:0;padding:0;";
+  uList.appendChild(fragment);
+  starsPlaceholder.appendChild(uList);
 }
