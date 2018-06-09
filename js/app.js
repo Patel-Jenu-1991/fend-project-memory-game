@@ -170,6 +170,7 @@ function clearDeck() {
 function displayCard(card) {
   if (card && card.nodeName === "LI") {
     card.classList.add("open", "show");
+    card.classList.add("disable");
   }
 }
 
@@ -200,6 +201,7 @@ function lockCards(list) {
 function hideCards(list) {
   for (const card of list) {
     card.classList.remove("open", "show");
+    card.classList.remove("disable");
   }
 }
 
