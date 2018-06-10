@@ -118,6 +118,10 @@ We only want the cards to be locked when they have been matched
   cursor: pointer;
 }
 
+#display-timer {
+  margin-left: 25px;
+}
+
 /* Modal dialgoue box css */
 
 /* The Modal (background) */
