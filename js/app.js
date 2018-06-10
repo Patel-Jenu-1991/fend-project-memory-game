@@ -111,14 +111,7 @@ let openCards = [], moveCounter = 0;
 
 // TODO: write an event handler for the restart button
 restart.addEventListener("click", function () {
-  // reset Moves
-  resetMoves();
-  // reset stars
-  resetStars();
-  // clear the deck
-  clearDeck();
-  // reinitialize game using the same function to initialize our game
-  initGame();
+  restartGame();
 });
 
 // TODO: write an event handler for the deck
@@ -158,6 +151,18 @@ function initGame() {
   deck.appendChild(generateCards(shuffle(cards)));
 }
 
+// TODO: write a function to restart the game
+function restartGame() {
+  // reset Moves
+  resetMoves();
+  // reset stars
+  resetStars();
+  // clear the deck
+  clearDeck();
+  // reinitialize game using the same function to initialize our game
+  initGame();
+}
+
 // TODO: write a function to clear the deck
 function clearDeck() {
   while (deck.firstElementChild != null) {
@@ -169,8 +174,7 @@ function clearDeck() {
 
 function displayCard(card) {
   if (card && card.nodeName === "LI") {
-    card.classList.add("open", "show");
-    card.classList.add("disable");
+    card.classList.add("open", "show", "disable");
   }
 }
 
@@ -200,8 +204,7 @@ function lockCards(list) {
 // TODO: write a function to hide cards
 function hideCards(list) {
   for (const card of list) {
-    card.classList.remove("open", "show");
-    card.classList.remove("disable");
+    card.classList.remove("open", "show", "disable");
   }
 }
 
@@ -262,6 +265,7 @@ function updateStars() {
 function isWinner() {
   let matchedCards = document.querySelectorAll(".match");
   if (matchedCards.length === 16) {
+    gameStats();
     displayModal("block");
   }
 }
@@ -274,29 +278,35 @@ let modal = document.getElementById("congrats-dialogue");
 let closeButton = document.querySelector(".close-button");
 // Get the modal close button to close the dialogue
 let modalCloseBtn = document.getElementById("modal-close-btn");
+// Get the modal play again button to restart the game
+let modalPlayAgain = document.getElementById("modal-play-again");
 
 // When the user clicks on <span> (x), close the modal
-closeButton.addEventListener("click", function() {
+closeButton.addEventListener("click", function () {
   displayModal("none");
 });
 
 // When the user clicks on dialogue Close button, close the modal
-modalCloseBtn.addEventListener("click", function() {
+modalCloseBtn.addEventListener("click", function () {
+  displayModal("none");
+});
+
+// When the user clicks on Play Again! button, close the modal
+// and restart the game
+modalPlayAgain.addEventListener("click", function () {
+  restartGame();
   displayModal("none");
 });
 
 // When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function(event) {
-  if (event.target == modal) {
+window.addEventListener("click", function (event) {
+  if (event.target === modal) {
     displayModal("none");
   }
 });
 
 // Handle modal display
 function displayModal(display) {
-  if (display === "block") {
-    gameStats();
-  }
   modal.style.display = display;
 }
 
@@ -318,5 +328,6 @@ function getStars() {
   }
   uList.style.cssText = "list-style-type:none;margin:0;padding:0;";
   uList.appendChild(fragment);
+  starsPlaceholder.innerHTML = "";
   starsPlaceholder.appendChild(uList);
 }
