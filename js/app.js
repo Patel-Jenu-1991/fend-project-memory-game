@@ -310,6 +310,7 @@ function displayModal(display) {
   modal.style.display = display;
 }
 
+// TODO: write a function to summarize game stats
 function gameStats() {
   let movesPlaceholder = document.getElementById("moves-placeholder");
   // let timePlaceholder = document.getElementById("time-placeholder");
@@ -317,12 +318,13 @@ function gameStats() {
   movesPlaceholder.textContent = moves.textContent;
 }
 
+// TODO: write a function to get the star rating
 function getStars() {
   let starsPlaceholder = document.getElementById("stars-placeholder");
   let stars = document.querySelectorAll(".stars li");
   let fragment = document.createDocumentFragment();
   let uList = document.createElement("ul");
-  for (star of stars) {
+  for (const star of stars) {
     star.style.display = "inline";
     fragment.appendChild(star);
   }
