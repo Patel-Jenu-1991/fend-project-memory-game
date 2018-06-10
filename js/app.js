@@ -1,3 +1,46 @@
+// Plug-in timer module
+class Timer {
+  constructor(hours, minutes, seconds, timerId, timer) {
+    this.hours = hours;
+    this.minutes = minutes;
+    this.seconds = seconds;
+    this.timerId = timerId;
+    this.timer = timer;
+    this.hours = 0;
+    this.minutes = 0;
+    this.seconds = 0;
+    this.timer = document.getElementById("display-timer");
+  }
+
+  start() {
+    this.timerId = setInterval(() => {
+      this.seconds++;
+      if (this.seconds === 60) {
+        this.minutes++;
+        this.seconds = 0;
+      }
+      if (this.minutes === 60) {
+        this.hours++;
+        this.minutes = 0;
+      }
+      this.timer.textContent = `${this.hours} Hrs : ${this.minutes} Mins :
+      ${this.seconds} Secs`;
+    }, 1000);
+  }
+
+  stop() {
+    clearInterval(this.timerId);
+  }
+
+  reset() {
+    this.hours = 0;
+    this.minutes = 0;
+    this.seconds = 0;
+    this.timer.textContent = `${this.hours} Hrs : ${this.minutes} Mins :
+    ${this.seconds} Secs`;
+  }
+}
+
 /*
  * Create a list that holds all of your cards
  */
@@ -109,6 +152,9 @@ function shuffle(array) {
 // array to work with list of open cards, move counter
 let openCards = [], moveCounter = 0;
 
+// initialize timer object
+let timer = new Timer();
+
 // TODO: write an event handler for the restart button
 restart.addEventListener("click", function () {
   restartGame();
@@ -153,6 +199,8 @@ function initGame() {
 
 // TODO: write a function to restart the game
 function restartGame() {
+  // reset timer
+  timer.reset();
   // reset Moves
   resetMoves();
   // reset stars
@@ -175,6 +223,9 @@ function clearDeck() {
 function displayCard(card) {
   if (card && card.nodeName === "LI") {
     card.classList.add("open", "show", "disable");
+    if (moveCounter === 0) {
+      timer.start();
+    }
   }
 }
 
@@ -265,8 +316,10 @@ function updateStars() {
 function isWinner() {
   let matchedCards = document.querySelectorAll(".match");
   if (matchedCards.length === 16) {
+    timer.stop();
     gameStats();
     displayModal("block");
+    return true;
   }
 }
 
