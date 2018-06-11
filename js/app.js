@@ -156,6 +156,8 @@ function initGame() {
 
 // TODO: write a function to restart the game
 function restartGame() {
+  // stop timer
+  timer.stop();
   // reset timer
   timer.reset();
   // reset Moves
@@ -321,10 +323,12 @@ function displayModal(display) {
 
 // TODO: write a function to summarize game stats
 function gameStats() {
+  let timer = document.getElementById("display-timer").textContent;
   let movesPlaceholder = document.getElementById("moves-placeholder");
-  // let timePlaceholder = document.getElementById("time-placeholder");
+  let timePlaceholder = document.getElementById("time-placeholder");
   getStars();
   movesPlaceholder.textContent = moves.textContent;
+  timePlaceholder.textContent = timer;
 }
 
 // TODO: write a function to get the star rating

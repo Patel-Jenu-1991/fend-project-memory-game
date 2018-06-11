@@ -249,6 +249,7 @@ We only want the cards to be locked when they have been matched
 
 .modal-body table td.stat {
   text-align: right;
+  padding-right: 10px;
 }
 
 .modal-footer {
