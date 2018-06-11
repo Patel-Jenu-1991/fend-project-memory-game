@@ -134,18 +134,18 @@ function gamePlay(target, openCards) {
       setTimeout(function () {
         lockCards(openCards);
         emptyList(openCards);
-      }, 100);
+      }, 300);
       updateMoves(target);
     } else {
       // match not found, hide cards, empty list of open cards
       setTimeout(function () {
         hideCards(openCards);
         emptyList(openCards);
-      }, 100);
+      }, 300);
       updateMoves(target);
     }
   }
-  setTimeout(isWinner, 100);
+  setTimeout(isWinner, 300);
 }
 
 // TODO: write a function to initialize Game
