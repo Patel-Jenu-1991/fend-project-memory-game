@@ -42,6 +42,14 @@ h1 {
   width: 660px;
   min-height: 680px;
   background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+  background-image: linear-gradient(
+    135deg,
+    rgba(191, 191, 191, 1),
+    rgba(219, 220, 226, 1),
+    rgba(184, 186, 198, 1),
+    rgba(217, 217, 217, 1),
+    rgba(166, 166, 166, 1)
+  );
   padding: 32px;
   border-radius: 10px;
   box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -50,12 +58,26 @@ h1 {
   justify-content: space-between;
   align-items: center;
   margin: 0 0 3em;
+  perspective: 1000px;
 }
 
 .deck .card {
   height: 125px;
   width: 125px;
-  background: #2e3d49;
+  background-color: #2e3d49;
+  background-image: linear-gradient(
+    135deg,
+    rgba(76, 76, 76, 1) 0%,
+    rgba(89, 89, 89, 1) 12%,
+    rgba(102, 102, 102, 1) 25%,
+    rgba(71, 71, 71, 1) 39%,
+    rgba(44, 44, 44, 1) 50%,
+    rgba(0, 0, 0, 1) 51%,
+    rgba(17, 17, 17, 1) 60%,
+    rgba(43, 43, 43, 1) 76%,
+    rgba(28, 28, 28, 1) 91%,
+    rgba(19, 19, 19, 1) 100%
+  );
   font-size: 0;
   color: #ffffff;
   border-radius: 8px;
@@ -78,8 +100,20 @@ h1 {
 .deck .card.open {
   animation-duration: 0.3s;
   animation-name: flipCard;
+  animation-timing-function: ease-in-out;
   backface-visibility: visible;
-  background: #02b3e4;
+  background-color: #02b3e4;
+  background-image: linear-gradient(
+    135deg,
+    rgba(206, 219, 233, 1) 0%,
+    rgba(170, 197, 222, 1) 17%,
+    rgba(97, 153, 199, 1) 50%,
+    rgba(58, 132, 195, 1) 51%,
+    rgba(65, 154, 214, 1) 59%,
+    rgba(75, 184, 240, 1) 71%,
+    rgba(58, 139, 194, 1) 84%,
+    rgba(38, 85, 139, 1) 100%
+  );
   cursor: default;
   transform: rotateY(0);
 }
@@ -89,20 +123,39 @@ h1 {
 }
 
 .deck .card.match {
-  background: #02ccba;
+  background-color: #02ccba;
+  background-image: radial-gradient(
+    ellipse at center,
+    rgba(76, 76, 76, 1) 0%,
+    rgba(89, 89, 89, 1) 12%,
+    rgba(102, 102, 102, 1) 25%,
+    rgba(71, 71, 71, 1) 39%,
+    rgba(44, 44, 44, 1) 50%,
+    rgba(0, 0, 0, 1) 51%,
+    rgba(17, 17, 17, 1) 60%,
+    rgba(43, 43, 43, 1) 76%,
+    rgba(28, 28, 28, 1) 91%,
+    rgba(19, 19, 19, 1) 100%
+  );
   cursor: default;
   font-size: 33px;
 }
 
 @keyframes flipCard {
   from {
-    transform: rotateY( 180deg );
+    transform: rotate3d( 1, 1, 1, -180deg );
   }
-  50 % {
-    transform: rotateY( 90deg );
+  80 % {
+    transform: rotate3d( 0.8, 0.8, 0.8, -120deg );
+  }
+  60 % {
+    transform: rotate3d( 0.6, 0.6, 0.6, -80deg );
+  }
+  40 % {
+    transform: rotate3d( 0.4, 0.4, 0.4, -40deg );
   }
   to {
-    transform: rotateY( 0deg );
+    transform: rotate3d( 0.2, 0.2, 0.2, 0deg );
   }
 }
 
