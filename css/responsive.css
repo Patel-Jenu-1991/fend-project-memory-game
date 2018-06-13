@@ -1,0 +1,64 @@
+/* Mobile Screens */
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  body {
+    animation: none;
+    background-image: url(../img/retina_wood.png);
+  }
+
+  h1 {
+    font-size: 40px;
+    margin: 40px 10px 20px 10px;
+    text-align: center;
+  }
+
+  .container {
+    margin: 0 auto;
+  }
+
+  .deck {
+    width: 350px;
+    min-height: 390px;
+    padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    perspective: 700px;
+  }
+
+  .deck .card {
+    height: 75px;
+    width: 75px;
+  }
+
+  .score-panel {
+    border: 1px solid #000;
+    border-radius: 16px;
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    width: 98%;
+  }
+
+  .score-panel .stars{
+
+  }
+
+  .score-panel .restart {
+    font-size: 26px;
+    margin-top: -40px;
+    margin-left: 5px;
+  }
+
+  #display-timer {
+    display: block;
+    font-size: 16px;
+    margin-left: 0;
+    padding-top: 5px;
+  }
+}
+
+/* tablets/netbooks/mid-size laptop screens */
+@media screen and (max-width: 1024px) {
+
+}
