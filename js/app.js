@@ -138,6 +138,7 @@ function gamePlay(target, openCards) {
       updateMoves(target);
     } else {
       // match not found, hide cards, empty list of open cards
+      unmatch(openCards);
       setTimeout(function () {
         hideCards(openCards);
         emptyList(openCards);
@@ -220,6 +221,18 @@ function emptyList(list) {
   while (list.length > 0) {
     list.pop();
   }
+}
+
+// TODO: write a function to unmatch the open cards
+function unmatch(list) {
+  for (const card of list) {
+    card.classList.add("unmatch");
+  }
+  setTimeout(function () {
+    for (const card of list) {
+      card.classList.remove("unmatch");
+    }
+  }, 300);
 }
 
 // TODO: write a function to keep track of the moves and display it on the page

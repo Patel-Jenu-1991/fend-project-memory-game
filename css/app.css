@@ -17,8 +17,20 @@ body {
 }
 
 body {
+  animation: aurora-beams 15s ease-in-out infinite;
   /* Background pattern from Subtle Patterns */
   background: #ffffff url("../img/geometry2.png");
+  background-image: linear-gradient(
+    135deg,
+    rgba(153, 153, 255, 1),
+    rgba(191, 191, 191, 1),
+    rgba(219, 220, 226, 1),
+    rgba(184, 186, 198, 1),
+    rgba(217, 217, 217, 1),
+    rgba(166, 166, 166, 1),
+    rgba(102, 204, 255, 1)
+  );
+  background-size: 400% 400%;
   font-family: "Coda", cursive;
 }
 
@@ -30,8 +42,10 @@ body {
 }
 
 h1 {
-  font-family: "Open Sans", sans-serif;
-  font-weight: 300;
+  font-family: 'Monofett', cursive;
+  font-weight: bolder;
+  font-size: 76px;
+  margin: 30px;
 }
 
 /*
@@ -123,6 +137,9 @@ h1 {
 }
 
 .deck .card.match {
+  animation-duration: 0.75s;
+  animation-name: elasticity;
+  animation-timing-function: ease-in-out;
   background-color: #02ccba;
   background-image: radial-gradient(
     ellipse at center,
@@ -141,22 +158,19 @@ h1 {
   font-size: 33px;
 }
 
-@keyframes flipCard {
-  from {
-    transform: rotate3d( 1, 1, 1, -180deg );
-  }
-  80 % {
-    transform: rotate3d( 0.8, 0.8, 0.8, -120deg );
-  }
-  60 % {
-    transform: rotate3d( 0.6, 0.6, 0.6, -80deg );
-  }
-  40 % {
-    transform: rotate3d( 0.4, 0.4, 0.4, -40deg );
-  }
-  to {
-    transform: rotate3d( 0.2, 0.2, 0.2, 0deg );
-  }
+.deck .card.unmatch {
+  animation-duration: 0.45s;
+  animation-name: vibrate;
+  animation-timing-function: ease-in-out;
+  backface-visibility: visible;
+  background: #f53;
+  background-image: linear-gradient(
+    135deg,
+    #efc5ca 0%,
+    #d24b5a 50%,
+    #ba2737 51%,
+    #f18e99 100%
+  );
 }
 
 /*
@@ -164,8 +178,10 @@ h1 {
  */
 
 .score-panel {
+  font-family: 'Revalia', cursive;
+  font-weight: bold;
   text-align: left;
-  width: 345px;
+  width: 465px;
   margin-bottom: 10px;
 }
 
@@ -223,29 +239,6 @@ h1 {
   width: 50%;
   -webkit-animation-name: slide-in-modal;
   -webkit-animation-duration: 0.7s;
-}
-
-/* Add Animation */
-@-webkit-keyframes slide-in-modal {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
-}
-
-@keyframes slide-in-modal {
-  from {
-    top: -300px;
-    opacity: 0;
-  }
-  to {
-    top: 0;
-    opacity: 1;
-  }
 }
 
 /* The Close Button */
@@ -338,4 +331,98 @@ h1 {
   background-color: #000;
   color: #fff;
   cursor: pointer;
+}
+
+/* Animation frames */
+
+/* Body Background animation frame */
+
+@keyframes aurora-beams {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Modal Animation Frame */
+
+@keyframes slide-in-modal {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* Deck cards animation frames */
+
+/* When the card is flipped */
+
+@keyframes flipCard {
+  from {
+    transform: rotate3d( 0, 1, 0, -180deg );
+  }
+  80 % {
+    transform: rotate3d( 0, 1, 0, -120deg );
+  }
+  60 % {
+    transform: rotate3d( 0, 1, 0, -80deg );
+  }
+  40 % {
+    transform: rotate3d( 0, 1, 0, -40deg );
+  }
+  to {
+    transform: rotate3d( 0, 1, 0, 0deg );
+  }
+}
+
+/* When cards are matched */
+
+@keyframes elasticity {
+  from {
+    transform: scale3d( 1, 1, 1 );
+  }
+  30% {
+    transform: scale3d( 1.15, 0.8, 1 );
+  }
+  40% {
+    transform: scale3d( 0.8, 1.15, 1 );
+  }
+  60% {
+    transform: scale3d( 1.15, 0.8, 1 );
+  }
+  to {
+    transform: scale3d( 1, 1, 1 );
+  }
+}
+
+/* When cards are unmatched */
+
+@keyframes vibrate {
+  0% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  20% {
+    transform: translate3d(10px, 0, 0);
+  }
+  40% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  60% {
+    transform: translate3d(10px, 0, 0);
+  }
+  80% {
+    transform: translate3d(-10px, 0, 0);
+  }
+  100% {
+    transform: translate3d(10px, 0, 0);
+  }
 }
