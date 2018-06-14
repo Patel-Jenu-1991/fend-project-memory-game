@@ -290,7 +290,7 @@ function isWinner() {
   if (matchedCards.length === 16) {
     timer.stop();
     gameStats();
-    displayModal("block");
+    setTimeout(() => displayModal("block"), 300);
   }
 }
 
@@ -360,11 +360,12 @@ function getStars() {
   fragmentClone = fragment.cloneNode(true);
   // preformat unordered list for modal window
   uList.style.cssText = "list-style-type:none;margin:0;padding:0;";
-  // clone it to the modal window
-  uList.appendChild(fragment);
-  starsPlaceholder.appendChild(uList);
   // Leave the Document Window display of stars intact
   keepDocumentStars(fragmentClone);
+  // clone it to the modal window
+  uList.appendChild(fragment);
+  starsPlaceholder.innerHTML = '';
+  starsPlaceholder.appendChild(uList);
 }
 
 /*
