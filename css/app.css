@@ -44,7 +44,8 @@ body {
 h1 {
   font-family: 'Monofett', cursive;
   font-weight: bolder;
-  font-size: 76px;
+  font-size: 120px; /* Fallback size */
+  font-size: 6vw;
   margin: 30px;
 }
 
@@ -323,7 +324,7 @@ h1 {
   font-size: 16px;
   font-weight: bold;
   padding: 5px;
-  width: 24%;
+  width: 35%;
 }
 
 .modal-button:hover,

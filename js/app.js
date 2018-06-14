@@ -344,18 +344,42 @@ function gameStats() {
   timePlaceholder.textContent = timer;
 }
 
-// TODO: write a function to get the star rating
+// TODO: write a function to get the star rating (helper function to gameStats)
 function getStars() {
   let starsPlaceholder = document.getElementById("stars-placeholder");
   let stars = document.querySelectorAll(".stars li");
   let fragment = document.createDocumentFragment();
   let uList = document.createElement("ul");
+  let fragmentCopy;
   for (const star of stars) {
     star.style.display = "inline";
     fragment.appendChild(star);
   }
+  // Clone fragment to keep display of stars intact
+  // on the Memory Game UI window.
+  fragmentClone = fragment.cloneNode(true);
+  // preformat unordered list for modal window
   uList.style.cssText = "list-style-type:none;margin:0;padding:0;";
+  // clone it to the modal window
   uList.appendChild(fragment);
-  starsPlaceholder.innerHTML = "";
   starsPlaceholder.appendChild(uList);
+  // Leave the Document Window display of stars intact
+  keepDocumentStars(fragmentClone);
+}
+
+/*
+ * @@description: keeps the stars in our Memory Game UI window .score panel
+ * intact which get erased as a side effect of using querySelectorAll
+ * in my getStars function.
+ */
+
+function keepDocumentStars(fragmentClone) {
+  // create new unordered list element
+  let uList = document.createElement("ul");
+  // target the Memory Game UI window .score panel stars
+  let documentStars = document.querySelector(".stars");
+  // populate unordered list using fragmentClone
+  uList.appendChild(fragmentClone);
+  // Re-display the stars
+  documentStars.innerHTML = uList.innerHTML;
 }
