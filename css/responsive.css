@@ -69,7 +69,7 @@
     padding-top: 5px;
   }
 
-  /* Modal box */
+  /* Congrats Modal */
 
   .modal-content {
     width: 97.5%;
@@ -127,6 +127,14 @@
     width: 42%;
   }
 
+  /* Progress Modal */
+  .prog-modal {
+    padding-top: 100px;
+  }
+
+  .prog-dialogue {
+    width: 80%;
+  }
 }
 
 /* tablets/netbooks/mid-size laptop screens */
@@ -188,6 +196,8 @@
     padding-top: 5px;
   }
 
+  /* Congrats Modal */
+
   .modal-content {
     width: 95%;
   }
@@ -234,6 +244,24 @@
   .close-button {
     font-size: 38px !important;
     padding: 6px 24px !important;
+  }
+
+  /* Progress Modal */
+  .prog-modal {
+    padding-top: 300px !important;
+  }
+
+  .prog-dialogue {
+    padding: 15px !important;
+    width: 80%;
+  }
+
+  .prog-dialogue h5 {
+    font-size: 36px !important;
+  }
+
+  .bar {
+    min-height: 30px;
   }
 }
 
@@ -302,5 +330,10 @@
   .modal-button {
     font-size: 20px;
     width: 20%;
+  }
+
+  /* Progress Modal */
+  .prog-modal {
+    padding-top: 180px;
   }
 }

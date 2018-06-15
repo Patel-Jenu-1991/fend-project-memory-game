@@ -21,6 +21,8 @@ let restart = document.querySelector("div.restart");
 let moves = document.querySelector("span.moves");
 // select stars from score panel
 let stars = document.querySelector(".stars");
+// target the progress dialgoue
+let progModal = document.getElementById("progress-modal");
 
 /*
  * Display the cards on the page
@@ -151,8 +153,19 @@ function gamePlay(target, openCards) {
 
 // TODO: write a function to initialize Game
 function initGame() {
-  // preparing deck..., shuffle cards on the fly
-  deck.appendChild(generateCards(shuffle(cards)));
+  // display progress modal
+  setTimeout(() => {
+    displayProgModal("block");
+  }, 0);
+  // close progress modal
+  setTimeout(() => {
+    displayProgModal("none");
+  }, 5500);
+  // prepare deck before time
+  setTimeout(() => {
+    // preparing deck..., shuffle cards on the fly
+    deck.appendChild(generateCards(shuffle(cards)));
+  }, 5000);
 }
 
 // TODO: write a function to restart the game
@@ -383,4 +396,8 @@ function keepDocumentStars(fragmentClone) {
   uList.appendChild(fragmentClone);
   // Re-display the stars
   documentStars.innerHTML = uList.innerHTML;
+}
+
+function displayProgModal(display) {
+  progModal.style.display = display;
 }
