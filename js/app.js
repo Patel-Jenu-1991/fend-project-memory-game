@@ -369,7 +369,7 @@ function getStars() {
 }
 
 /*
- * @@description: keeps the stars in our Memory Game UI window .score panel
+ * @description: keeps the stars in our Memory Game UI window .score panel
  * intact which get erased as a side effect of using querySelectorAll
  * in my getStars function.
  */

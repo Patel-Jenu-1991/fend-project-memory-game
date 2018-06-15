@@ -75,8 +75,13 @@
     width: 97.5%;
   }
 
+  .modal-box {
+    padding-top: 200px;
+  }
+
   .close-button {
-    padding: 0px 12px;
+    font-size: 24px;
+    padding: 2px 12px;
   }
 
   .modal-header {
@@ -98,17 +103,28 @@
     text-shadow: 1px 1px rgba(128, 128, 128, 1);
   }
 
+  .modal-header h3 {
+    font-size: 16px;
+  }
+
   .modal-body {
     letter-spacing: 1px;
     text-shadow: 1px 1px rgba(192, 192, 192, 1)
   }
 
   .modal-body h4 {
+    font-size: 28px;
     margin-top: 10px;
   }
 
+  .modal-body table {
+    font-size: 18px;
+  }
+
   .modal-button {
-    width: 40%;
+    font-size: 18px;
+    font-weight: bolder;
+    width: 42%;
   }
 
 }
@@ -176,8 +192,16 @@
     width: 95%;
   }
 
-  .modal-body {
-    font-size: 28px !important;
+  .modal-box {
+    padding-top: 460px !important;
+  }
+
+  .modal-body h4 {
+    font-size: 50px !important;
+  }
+
+  .modal-body table {
+    font-size: 32px !important;
   }
 
   .modal-header {
@@ -200,20 +224,16 @@
   }
 
   .modal-header h3 {
-    font-size: 36px;
-  }
-
-  .modal-body h4 {
-    font-size: 40px;
+    font-size: 36px !important;
   }
 
   .modal-button {
-    font-size: 30px;
+    font-size: 30px !important;
   }
 
   .close-button {
-    font-size: 36px;
-    padding: 6px 20px;
+    font-size: 38px !important;
+    padding: 6px 24px !important;
   }
 }
 
@@ -258,15 +278,29 @@
     padding-top: 5px;
   }
 
-  .modal-box {
-    padding-top: 360px;
+  .close-button {
+    font-size: 30px;
+    padding: 4px 18px;
   }
 
-  .modal-body {
-    font-size: 18px;
+  .modal-header h3 {
+    font-size: 24px;
+  }
+
+  .modal-box {
+    padding-top: 400px;
+  }
+
+  .modal-body h4 {
+    font-size: 34px;
+  }
+
+  .modal-body table {
+    font-size: 20px;
   }
 
   .modal-button {
+    font-size: 20px;
     width: 20%;
   }
 }
