@@ -290,7 +290,7 @@ function isWinner() {
   if (matchedCards.length === 16) {
     timer.stop();
     gameStats();
-    setTimeout(() => displayModal("block"), 300);
+    setTimeout(() => displayModal("block"), 1200);
   }
 }
 

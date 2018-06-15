@@ -179,10 +179,14 @@ h1 {
  */
 
 .score-panel {
+  border: 1px solid #000;
+  border-radius: 15px;
   font-family: 'Revalia', cursive;
+  font-size: 26px;
   font-weight: bold;
+  padding: 16px;
   text-align: left;
-  width: 465px;
+  width: 765px;
   margin-bottom: 10px;
 }
 
@@ -323,8 +327,20 @@ h1 {
   border-radius: 10px;
   font-size: 16px;
   font-weight: bold;
+  background-image: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #f1f1f1 50%,
+    #e1e1e1 51%,
+    #f6f6f6 100%
+  );
+  color: rgba(80, 80, 80, 1);
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 1px;
   padding: 5px;
-  width: 35%;
+  text-shadow: 1px 1px rgba(192, 192, 192, 1);
+  width: 16%;
 }
 
 .modal-button:hover,
