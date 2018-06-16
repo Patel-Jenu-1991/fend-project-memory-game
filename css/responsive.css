@@ -1,5 +1,6 @@
-/* Mobile Screens */
+/* ----------------------------- Mobile Screens ----------------------------- */
 @media screen and (min-width: 300px) and (max-width: 768px) {
+  /* ---------------------- General Styling ---------------------- */
   body {
     animation: none;
     background-image: url(../img/retina_wood.png);
@@ -69,7 +70,7 @@
     padding-top: 5px;
   }
 
-  /* Congrats Modal */
+  /* ---------------------- Congratulations Modal ---------------------- */
 
   .modal-content {
     width: 97.5%;
@@ -109,7 +110,7 @@
 
   .modal-body {
     letter-spacing: 1px;
-    text-shadow: 1px 1px rgba(192, 192, 192, 1)
+    text-shadow: 1px 1px rgba(192, 192, 192, 1);
   }
 
   .modal-body h4 {
@@ -135,12 +136,13 @@
   .prog-dialogue {
     width: 80%;
   }
+
+  /* ---------------------- ************** ---------------------- */
 }
 
-/* tablets/netbooks/mid-size laptop screens */
-
-/* iPad Pro */
-@media screen and (min-height: 1366px) and (min-width: 1024px)  {
+/* ------------ iPad Pro/tablets/netbooks/mid-size laptop screens ----------- */
+@media screen and (min-height: 1366px) and (min-width: 1024px) {
+  /* ---------------------- General Styling ---------------------- */
   body {
     animation: none;
     background-image: url(../img/retina_wood.png);
@@ -196,7 +198,7 @@
     padding-top: 5px;
   }
 
-  /* Congrats Modal */
+  /* ---------------------- Congratulations Modal ---------------------- */
 
   .modal-content {
     width: 95%;
@@ -246,7 +248,7 @@
     padding: 6px 24px !important;
   }
 
-  /* Progress Modal */
+  /* ---------------------- Progress Modal ---------------------- */
   .prog-modal {
     padding-top: 300px !important;
   }
@@ -263,11 +265,14 @@
   .bar {
     min-height: 30px;
   }
+
+  /* ---------------------- ************** ---------------------- */
 }
 
-/* iPad Mini, iPad */
+/* ---------------------- iPad Mini, iPad ---------------------- */
 
 @media screen and (min-height: 1024px) {
+  /* ---------------------- General Styling ---------------------- */
   .deck {
     min-height: 500px;
     margin-top: 5px;
@@ -298,6 +303,8 @@
     font-size: 65px;
     margin-top: -95px;
   }
+
+  /* ---------------------- Congratulations Modal ---------------------- */
 
   #display-timer {
     display: block;
@@ -332,8 +339,10 @@
     width: 20%;
   }
 
-  /* Progress Modal */
+  /* ---------------------- Progress Modal ---------------------- */
   .prog-modal {
     padding-top: 180px;
   }
+
+  /* ---------------------- ************** ---------------------- */
 }

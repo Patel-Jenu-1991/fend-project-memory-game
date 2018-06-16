@@ -1,3 +1,13 @@
+/*
+ * @description Represents a Timer
+ * @constructor
+ * @param {integer} hours - Represents the hours
+ * @param {integer} minutes - Represents the minutes
+ * @param {integer} seconds - Represents the seconds
+ * @param {HTML Element} timer - Represents the timer in score panel
+ * @param {number/ID} timerId - Represents the timer ID to be passed
+ * as an argument to clearTimeout
+ */
 class Timer {
   constructor(hours, minutes, seconds, timerId, timer) {
     this.hours = hours;
@@ -11,6 +21,7 @@ class Timer {
     this.timer = document.getElementById("display-timer");
   }
 
+  // starts and ticks the timer
   start() {
     this.timerId = setTimeout(() => {
       this.seconds++;
@@ -30,10 +41,12 @@ class Timer {
     }, 1000);
   }
 
+  // stops the timer
   stop() {
     clearTimeout(this.timerId);
   }
 
+  // resets the timer
   reset() {
     this.hours = 0;
     this.minutes = 0;

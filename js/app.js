@@ -3,16 +3,25 @@
  */
 
 let cards = [
-  "fa-diamond", "fa-diamond",
-  "fa-paper-plane-o", "fa-paper-plane-o",
-  "fa-anchor", "fa-anchor",
-  "fa-bolt", "fa-bolt",
-  "fa-cube", "fa-cube",
-  "fa-leaf", "fa-leaf",
-  "fa-bicycle", "fa-bicycle",
-  "fa-bomb", "fa-bomb"
+  "fa-diamond",
+  "fa-diamond",
+  "fa-paper-plane-o",
+  "fa-paper-plane-o",
+  "fa-anchor",
+  "fa-anchor",
+  "fa-bolt",
+  "fa-bolt",
+  "fa-cube",
+  "fa-cube",
+  "fa-leaf",
+  "fa-leaf",
+  "fa-bicycle",
+  "fa-bicycle",
+  "fa-bomb",
+  "fa-bomb"
 ];
 
+// Target all the DOM elements to work with
 // grab the deck
 let deck = document.querySelector("ul.deck");
 // get me the restart button
@@ -33,7 +42,12 @@ let progModal = document.getElementById("progress-modal");
 
 initGame();
 
-// TODO: write a function to generate the cards
+/*
+ * @description returns a fragment for our deck
+ * with all the cards populated
+ * @constructor
+ * @param {Array} cards - The card types
+ */
 
 function generateCards(cards) {
   const fragment = document.createDocumentFragment();
@@ -47,15 +61,18 @@ function generateCards(cards) {
   return fragment;
 }
 
-// TODO: write a function to generate HTML of a single card
+/*
+ * @description returns an li element for a given card,
+ * it is a helper function to generateCards
+ * @constructor
+ * @param {string} card - The card type
+ */
 
 function createCard(card) {
-  // returns card HTML for each given card
-
   // create the listItem and set its attribute nodes
   let listItem = document.createElement("li"),
-      attr = document.createAttribute("class"),
-      type = document.createAttribute("data-card-type");
+    attr = document.createAttribute("class"),
+    type = document.createAttribute("data-card-type");
   attr.value = "card";
   type.value = `${card}`;
   listItem.setAttributeNode(attr);
@@ -63,100 +80,110 @@ function createCard(card) {
 
   // create the icon element and set its attribute node
   let icon = document.createElement("i"),
-      att = document.createAttribute("class");
+    att = document.createAttribute("class");
   att.value = `fa ${card}`;
   icon.setAttributeNode(att);
 
   // append the icon element to its respective listItem
   listItem.appendChild(icon);
 
-  // return card HTML as listItem
+  // return card HTML
   return listItem;
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+/*
+ * @description returns the given array shuffled/jumbled
+ * @constructor
+ * @param {Array} array - The card types
+ * @returns {Array} The suffled/jumbled array
+ */
 function shuffle(array) {
-    let currentIndex = array.length, temporaryValue, randomIndex;
+  let currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
 
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another
- *    function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality  --> CONTINUE HERE...
- *    in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this
- *      functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the
- *      card's symbol (put this functionality in another function that you call
- *      from this one)
- *    + increment the move counter and display it on the page (put this
- *      functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score
- *      (put this functionality in another function that you call from this one)
- */
-
 // array to work with list of open cards, move counter
-let openCards = [], moveCounter = 0, gameId;
+let openCards = [],
+  moveCounter = 0;
 
 // initialize timer object
 let timer = new Timer();
 
-// TODO: write an event handler for the restart button
-restart.addEventListener("click", function () {
+// Restart the game when the restart icon is clicked
+restart.addEventListener("click", () => {
   restartGame();
 });
 
-// TODO: write an event handler for the deck
-deck.addEventListener("click", function (event) {
+// Event delegation for our Memory Game
+deck.addEventListener("click", event => {
+  // get the target
   let target = event.target;
+  // display the target
   displayCard(target);
+  // add target to the list of openCards
   addCard(target, openCards);
+  // handle gamePlay for target and openCards
   gamePlay(target, openCards);
 });
 
-// TODO: write a game play function to handle the game play
+/*
+ * @description Handles the game play asynchronously
+ * on our Deck
+ * @constructor
+ * @param {event.target} target - The card type that has been clicked on
+ * @param {Array} openCards - The list of cards that are currently open
+ */
 function gamePlay(target, openCards) {
   if (openCards.length == 2) {
     // check if the cards match
     if (matchCards(openCards)) {
-      // match found, lock the cards in open position
-      setTimeout(function () {
+      // match found, lock the cards in open position, update moves
+      setTimeout(function() {
         lockCards(openCards);
         emptyList(openCards);
       }, 300);
       updateMoves(target);
     } else {
-      // match not found, hide cards, empty list of open cards
+      // unmatch openCards
       unmatch(openCards);
-      setTimeout(function () {
+      // match not found, hide cards, empty list of open cards, update moves
+      setTimeout(function() {
         hideCards(openCards);
         emptyList(openCards);
       }, 300);
       updateMoves(target);
     }
   }
+  // Check if the user has won the game and display
+  // the congrats modal, at every click on a card
   setTimeout(isWinner, 300);
 }
 
-// TODO: write a function to restart the game
+/*
+ * @description Reloads the current window location
+ * to restart the game and reset game stats
+ */
 function restartGame() {
   location.reload();
 }
 
-// TODO: write a function to initialize Game
+/*
+ * @description Initializes the game,
+ * Shows an indefinite progress bar modal,
+ * Prepares the deck of cards
+ */
 function initGame() {
   // display progress modal
   setTimeout(() => displayModal(progModal, "block"), 0);
@@ -169,30 +196,50 @@ function initGame() {
   }, 5000);
 }
 
-// TODO: write a function to display card
-
+/*
+ * @description Displays the card when it is clicked on
+ * @constructor
+ * @param {event.target} card - The card type that was clicked on
+ */
 function displayCard(card) {
   if (card && card.nodeName === "LI") {
     card.classList.add("open", "show", "disable");
   }
 }
 
-// TODO: write a function to add open cards to the list of openCards
+/*
+ * @description Adds open cards on the deck to the
+ * given list of openCards
+ * @constructor
+ * @param {event.target} card - The card type that was clicked on
+ * @param {Array} list - The list of cards that are currently open
+ */
 function addCard(card, list) {
   list.push(card);
 }
 
-// TODO: write a function to match cards
+/*
+ * @description Matches the given list of cards that
+ * are currently open
+ * @constructor
+ * @param {Array} list - The list of cards that are currently open
+ * @returns {Boolean} whether card A matches card B
+ */
 function matchCards(list) {
   let cardTypes = [];
   for (const card of list) {
     cardTypes.push(card.getAttribute("data-card-type"));
   }
 
-  return (cardTypes[0] === cardTypes[1]);
+  return cardTypes[0] === cardTypes[1];
 }
 
-// TODO: write a function to lock the cards in open position
+/*
+ * @description Locks the cards in open position
+ * once they have been matched
+ * @constructor
+ * @param {Array} list - The list of cards that are currently open
+ */
 function lockCards(list) {
   for (const card of list) {
     card.classList.remove("open", "show");
@@ -200,38 +247,56 @@ function lockCards(list) {
   }
 }
 
-// TODO: write a function to hide cards
+/*
+ * @description Hides the cards if they don't match
+ * @constructor
+ * @param {Array} list - The list of cards that are currently open
+ */
 function hideCards(list) {
   for (const card of list) {
     card.classList.remove("open", "show", "disable");
   }
 }
 
-// TODO: write a function to empty the list of open cards
+/*
+ * @description Empties the list of cards that are currently open
+ * @constructor
+ * @param {Array} list - The list of cards that are currently open
+ */
 function emptyList(list) {
   while (list.length > 0) {
     list.pop();
   }
 }
 
-// TODO: write a function to unmatch the open cards
+/*
+ * @description Plays the vibrate animation frame when the cards
+ * that are currently open don't match
+ * @constructor
+ * @param {Array} list - The list of cards that are currently open
+ */
 function unmatch(list) {
   for (const card of list) {
     card.classList.add("unmatch");
   }
-  setTimeout(function () {
+  setTimeout(function() {
     for (const card of list) {
       card.classList.remove("unmatch");
     }
   }, 300);
 }
 
-// TODO: write a function to keep track of the moves and display it on the page
-
+/*
+ * @description Updates the moves when a pair of cards have been
+ * clicked on, Starts the timer game when a player makes the first move,
+ * Updates the star rating by invoking updateStars
+ * @constructor
+ * @param {event.target} card - The card type that was clicked on
+ */
 function updateMoves(target) {
   if (target && target.nodeName === "LI") {
     moveCounter++;
-    moves.textContent = '';
+    moves.textContent = "";
     moves.textContent = moveCounter;
   }
   if (moveCounter === 1) {
@@ -240,9 +305,10 @@ function updateMoves(target) {
   updateStars();
 }
 
-// TODO: write a function to update the stars
-// half star: fa-star-half-full, full star empty: fa-star-o
-
+/*
+ * @description Updates the star rating based on the value of the
+ * moveCounter, helper function to updateMoves
+ */
 function updateStars() {
   const starOne = document.getElementById("star-two");
   const starTwo = document.getElementById("star-three");
@@ -261,7 +327,12 @@ function updateStars() {
   }
 }
 
-// TODO: write a function to check for a win win situation
+/*
+ * @description Checks for a win win situation,
+ * Retrieves the game stats by invoking gameStats,
+ * Displays the congrats modal with game stats after
+ * a brief delay
+ */
 function isWinner() {
   let matchedCards = document.querySelectorAll(".match");
   if (matchedCards.length === 16) {
@@ -271,47 +342,61 @@ function isWinner() {
   }
 }
 
-// TODO: implement modal dialgoue box
-
-// Get the modal
+// TODO: Implement the congrats modal dialgoue box
+// Target all the congrats modal components to work with
+// Get the congrats modal
 let congratsModal = document.getElementById("congrats-dialogue");
-// Get the <span> element that closes the modal
+// Get the <span> element that closes the congrats modal
 let closeButton = document.querySelector(".close-button");
-// Get the modal close button to close the dialogue
+// Get the congrats modal close button to close the dialogue
 let modalCloseBtn = document.getElementById("modal-close-btn");
-// Get the modal play again button to restart the game
+// Get the congrats modal play again button to restart the game
 let modalPlayAgain = document.getElementById("modal-play-again");
 
+// Handle events for each component of the congrats modal
 // When the user clicks on <span> (x), close the modal
-closeButton.addEventListener("click", function () {
+closeButton.addEventListener("click", function() {
   displayModal(congratsModal, "none");
 });
 
 // When the user clicks on dialogue Close button, close the modal
-modalCloseBtn.addEventListener("click", function () {
+modalCloseBtn.addEventListener("click", function() {
   displayModal(congratsModal, "none");
 });
 
-// When the user clicks on Play Again! button, close the modal
-// and restart the game
-modalPlayAgain.addEventListener("click", function () {
+// When the user clicks on Play Again! button, close the congrats
+// modal and restart the game
+modalPlayAgain.addEventListener("click", function() {
   restartGame();
   displayModal(congratsModal, "none");
 });
 
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", function (event) {
+// When the user clicks anywhere outside of the congrats modal, close it
+window.addEventListener("click", function(event) {
   if (event.target === congratsModal) {
     displayModal(congratsModal, "none");
   }
 });
 
-// Handle modal display
+/*
+ * @description A helper function to display/hide a given modal,
+ * based on the given type of display
+ * @constructor
+ * @param {HTML Element} modal - The modal window HTML Element to
+ * display the appropriate modal (progress bar modal || congrats modal)
+ * in this case
+ * @param {String} display - The css property to set the display style
+ * of a modal
+ */
 function displayModal(modal, display) {
   modal.style.display = display;
 }
 
-// TODO: write a function to summarize game stats
+/*
+ * @description Summarizes the Game Stats, gets the moves, time,
+ * stars (by invoking getStars) and injects the game stats on to
+ * the appropriate placeholders in the congrats modal
+ */
 function gameStats() {
   let timer = document.getElementById("display-timer").textContent;
   let movesPlaceholder = document.getElementById("moves-placeholder");
@@ -321,7 +406,11 @@ function gameStats() {
   timePlaceholder.textContent = timer;
 }
 
-// TODO: write a function to get the star rating (helper function to gameStats)
+/*
+ * @description Gets the star rating and injects it on the appropriate
+ * placeholder in the congrats modal, leaves the stars intact in the
+ * score panel by invoking keepDocumentStars
+ */
 function getStars() {
   let starsPlaceholder = document.getElementById("stars-placeholder");
   let stars = document.querySelectorAll(".stars li");
@@ -341,16 +430,20 @@ function getStars() {
   keepDocumentStars(fragmentClone);
   // clone it to the modal window
   uList.appendChild(fragment);
-  starsPlaceholder.innerHTML = '';
+  // make sure the stars placeholder is empty in the congrats dialgoue
+  starsPlaceholder.innerHTML = "";
+  // paste the stars in congrats modal
   starsPlaceholder.appendChild(uList);
 }
 
 /*
  * @description: keeps the stars in our Memory Game UI window .score panel
  * intact which get erased as a side effect of using querySelectorAll
- * in my getStars function.
+ * in my getStars function, helper function to getStars
+ * @constructor
+ * @param {node} fragmentClone - The copy of fragment containing the
+ * star rating from getStars
  */
-
 function keepDocumentStars(fragmentClone) {
   // create new unordered list element
   let uList = document.createElement("ul");

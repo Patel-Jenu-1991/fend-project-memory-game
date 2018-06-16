@@ -42,7 +42,7 @@ body {
 }
 
 h1 {
-  font-family: 'Monofett', cursive;
+  font-family: "Monofett", cursive;
   font-weight: bolder;
   font-size: 120px; /* Fallback size */
   font-size: 6vw;
@@ -181,7 +181,7 @@ h1 {
 .score-panel {
   border: 1px solid #000;
   border-radius: 15px;
-  font-family: 'Revalia', cursive;
+  font-family: "Revalia", cursive;
   font-size: 26px;
   font-weight: bold;
   padding: 16px;
@@ -211,9 +211,9 @@ h1 {
   margin-left: 25px;
 }
 
-/* Modal dialgoue box css */
+/* ---------------------- Congratulations Modal ---------------------- */
 
-/* The Modal (background) */
+/* The Congrats Modal (background) */
 .modal-box {
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
@@ -228,7 +228,7 @@ h1 {
   z-index: 1; /* Sit on top */
 }
 
-/* Modal Content */
+/* Congrats Modal Content/dialgoue */
 .modal-content {
   animation-name: slide-in-modal;
   animation-duration: 0.7s;
@@ -281,6 +281,8 @@ h1 {
   text-decoration: none;
 }
 
+/* Congrats Modal Header */
+
 .modal-header {
   background-color: rgba(192, 192, 192, 1);
   background-image: linear-gradient(
@@ -306,6 +308,8 @@ h1 {
   -webkit-margin-after: 0;
 }
 
+/* Congrats Modal body */
+
 .modal-body {
   padding: 2px 16px;
 }
@@ -326,6 +330,8 @@ h1 {
   text-align: right;
   padding-right: 10px;
 }
+
+/* Congrats Modal Footer */
 
 .modal-footer {
   padding: 8px 16px;
@@ -453,19 +459,19 @@ h1 {
 
 @keyframes flipCard {
   from {
-    transform: rotate3d( 0, 1, 0, -180deg );
+    transform: rotate3d(0, 1, 0, -180deg);
   }
   80 % {
-    transform: rotate3d( 0, 1, 0, -120deg );
+    transform: rotate3d(0, 1, 0, -120deg);
   }
   60 % {
-    transform: rotate3d( 0, 1, 0, -80deg );
+    transform: rotate3d(0, 1, 0, -80deg);
   }
   40 % {
-    transform: rotate3d( 0, 1, 0, -40deg );
+    transform: rotate3d(0, 1, 0, -40deg);
   }
   to {
-    transform: rotate3d( 0, 1, 0, 0deg );
+    transform: rotate3d(0, 1, 0, 0deg);
   }
 }
 
@@ -473,19 +479,19 @@ h1 {
 
 @keyframes elasticity {
   from {
-    transform: scale3d( 1, 1, 1 );
+    transform: scale3d(1, 1, 1);
   }
   30% {
-    transform: scale3d( 1.15, 0.8, 1 );
+    transform: scale3d(1.15, 0.8, 1);
   }
   40% {
-    transform: scale3d( 0.8, 1.15, 1 );
+    transform: scale3d(0.8, 1.15, 1);
   }
   60% {
-    transform: scale3d( 1.15, 0.8, 1 );
+    transform: scale3d(1.15, 0.8, 1);
   }
   to {
-    transform: scale3d( 1, 1, 1 );
+    transform: scale3d(1, 1, 1);
   }
 }
 
@@ -522,3 +528,5 @@ h1 {
     background-position: 28px 0;
   }
 }
+
+/* ---------------------- **************************** ---------------------- */
