@@ -36,8 +36,7 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 + navigate into the project folder,
 + hit index.html to launch live view.
 
-Clone the repository.
-Run the following command at your terminal:
+Terminal Command:
 `$ git clone https://github.com/Patel-Jenu-1991/fend-project-memory-game.git`
 
 ## How I built the Matching Game?
