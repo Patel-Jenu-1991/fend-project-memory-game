@@ -242,8 +242,6 @@ h1 {
   padding: 0;
   text-align: center;
   width: 50%;
-  -webkit-animation-name: slide-in-modal;
-  -webkit-animation-duration: 0.7s;
 }
 
 /* The Close Button */
