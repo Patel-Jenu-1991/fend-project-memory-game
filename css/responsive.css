@@ -169,11 +169,11 @@
   }
 
   .deck .card.show {
-    font-size: 80px;
+    font-size: 80px !important;
   }
 
   .deck .card.match {
-    font-size: 80px;
+    font-size: 80px !important;
   }
 
   .score-panel {

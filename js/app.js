@@ -151,44 +151,22 @@ function gamePlay(target, openCards) {
   setTimeout(isWinner, 300);
 }
 
+// TODO: write a function to restart the game
+function restartGame() {
+  location.reload();
+}
+
 // TODO: write a function to initialize Game
 function initGame() {
   // display progress modal
-  setTimeout(() => {
-    displayProgModal("block");
-  }, 0);
+  setTimeout(() => displayModal(progModal, "block"), 0);
   // close progress modal
-  setTimeout(() => {
-    displayProgModal("none");
-  }, 5500);
+  setTimeout(() => displayModal(progModal, "none"), 5500);
   // prepare deck before time
   setTimeout(() => {
     // preparing deck..., shuffle cards on the fly
     deck.appendChild(generateCards(shuffle(cards)));
   }, 5000);
-}
-
-// TODO: write a function to restart the game
-function restartGame() {
-  // stop timer
-  timer.stop();
-  // reset timer
-  timer.reset();
-  // reset Moves
-  resetMoves();
-  // reset stars
-  resetStars();
-  // clear the deck
-  clearDeck();
-  // reinitialize game using the same function to initialize our game
-  initGame();
-}
-
-// TODO: write a function to clear the deck
-function clearDeck() {
-  while (deck.firstElementChild != null) {
-    deck.firstElementChild.remove();
-  }
 }
 
 // TODO: write a function to display card
@@ -262,20 +240,6 @@ function updateMoves(target) {
   updateStars();
 }
 
-// TODO: write a function to reset moves in the score panel
-function resetMoves() {
-  moveCounter = 0;
-  moves.textContent = '0';
-}
-
-// TODO: write a function to reset stars
-function resetStars() {
-  stars.innerHTML = '';
-  stars.innerHTML = `<li><i class="fa fa-star"></i></li>
-  <li><i id="star-two" class="fa fa-star"></i></li>
-  <li><i id="star-three" class="fa fa-star"></i></li>`;
-}
-
 // TODO: write a function to update the stars
 // half star: fa-star-half-full, full star empty: fa-star-o
 
@@ -303,14 +267,14 @@ function isWinner() {
   if (matchedCards.length === 16) {
     timer.stop();
     gameStats();
-    setTimeout(() => displayModal("block"), 1200);
+    setTimeout(() => displayModal(congratsModal, "block"), 1200);
   }
 }
 
 // TODO: implement modal dialgoue box
 
 // Get the modal
-let modal = document.getElementById("congrats-dialogue");
+let congratsModal = document.getElementById("congrats-dialogue");
 // Get the <span> element that closes the modal
 let closeButton = document.querySelector(".close-button");
 // Get the modal close button to close the dialogue
@@ -320,30 +284,30 @@ let modalPlayAgain = document.getElementById("modal-play-again");
 
 // When the user clicks on <span> (x), close the modal
 closeButton.addEventListener("click", function () {
-  displayModal("none");
+  displayModal(congratsModal, "none");
 });
 
 // When the user clicks on dialogue Close button, close the modal
 modalCloseBtn.addEventListener("click", function () {
-  displayModal("none");
+  displayModal(congratsModal, "none");
 });
 
 // When the user clicks on Play Again! button, close the modal
 // and restart the game
 modalPlayAgain.addEventListener("click", function () {
   restartGame();
-  displayModal("none");
+  displayModal(congratsModal, "none");
 });
 
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener("click", function (event) {
-  if (event.target === modal) {
-    displayModal("none");
+  if (event.target === congratsModal) {
+    displayModal(congratsModal, "none");
   }
 });
 
 // Handle modal display
-function displayModal(display) {
+function displayModal(modal, display) {
   modal.style.display = display;
 }
 
@@ -396,8 +360,4 @@ function keepDocumentStars(fragmentClone) {
   uList.appendChild(fragmentClone);
   // Re-display the stars
   documentStars.innerHTML = uList.innerHTML;
-}
-
-function displayProgModal(display) {
-  progModal.style.display = display;
 }
