@@ -53,21 +53,20 @@
     margin-top: 15px;
     margin-bottom: 25px;
     padding: 15px;
-    width: 290px;
-    text-shadow: 2px 2px rgba(200, 200, 200, 1);
+    width: 98%;
+    text-shadow: 1px 1px rgba(144, 144, 144, 1);
   }
 
   .score-panel .restart {
     font-size: 26px;
     margin-top: -40px;
-    margin-left: 5px;
   }
 
   #display-timer {
     display: block;
     font-size: 15px;
     margin-left: 0;
-    padding-top: 5px;
+    padding-top: 10px;
   }
 
   /* ---------------------- Congratulations Modal ---------------------- */
@@ -192,10 +191,7 @@
   }
 
   #display-timer {
-    display: block;
-    font-size: 40px;
-    margin-left: 0;
-    padding-top: 5px;
+    font-size: 32px !important;
   }
 
   /* ---------------------- Congratulations Modal ---------------------- */
@@ -285,11 +281,11 @@
   }
 
   .deck .card.show {
-    font-size: 55px;
+    font-size: 54px;
   }
 
   .deck .card.match {
-    font-size: 55px;
+    font-size: 54px;
   }
 
   .score-panel {
@@ -308,7 +304,7 @@
 
   #display-timer {
     display: block;
-    font-size: 36px;
+    font-size: 30px;
     margin-left: 0;
     padding-top: 5px;
   }

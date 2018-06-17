@@ -117,10 +117,15 @@ restart.addEventListener("click", () => {
 });
 
 // Event delegation for our Memory Game
-deck.addEventListener("click", event => {
-  // get the target
+deck.addEventListener("click", (event) => {
+  // detect only cards that have been clicked
   let target = event.target;
-  // display the target
+  if (target.nodeName === "LI" || target.nodeName === "I") {
+    target = target;
+  } else {
+    return;
+  }
+  // display the card that has been clicked on
   displayCard(target);
   // add target to the list of openCards
   addCard(target, openCards);
@@ -140,21 +145,22 @@ function gamePlay(target, openCards) {
     // check if the cards match
     if (matchCards(openCards)) {
       // match found, lock the cards in open position, update moves
-      setTimeout(function() {
+      setTimeout(() => {
         lockCards(openCards);
         emptyList(openCards);
       }, 300);
-      updateMoves(target);
+      // updateMoves(target);
     } else {
       // unmatch openCards
       unmatch(openCards);
       // match not found, hide cards, empty list of open cards, update moves
-      setTimeout(function() {
+      setTimeout(() => {
         hideCards(openCards);
         emptyList(openCards);
       }, 300);
-      updateMoves(target);
+      // updateMoves(target);
     }
+    updateMoves(target);
   }
   // Check if the user has won the game and display
   // the congrats modal, at every click on a card
@@ -192,7 +198,7 @@ function initGame() {
  * @param {event.target} card - The card type that was clicked on
  */
 function displayCard(card) {
-  (card && card.nodeName === "LI") && card.classList.add("open", "show", "disable");
+  (card) && card.classList.add("open", "show", "disable");
 }
 
 /*
@@ -282,7 +288,7 @@ function unmatch(list) {
  * @param {event.target} card - The card type that was clicked on
  */
 function updateMoves(target) {
-  if (target && target.nodeName === "LI") {
+  if (target) {
     moveCounter++;
     moves.textContent = "";
     moves.textContent = moveCounter;
@@ -341,24 +347,24 @@ let modalPlayAgain = document.getElementById("modal-play-again");
 
 // Handle events for each component of the congrats modal
 // When the user clicks on <span> (x), close the modal
-closeButton.addEventListener("click", function() {
+closeButton.addEventListener("click", () => {
   displayModal(congratsModal, "none");
 });
 
 // When the user clicks on dialogue Close button, close the modal
-modalCloseBtn.addEventListener("click", function() {
+modalCloseBtn.addEventListener("click", () => {
   displayModal(congratsModal, "none");
 });
 
 // When the user clicks on Play Again! button, close the congrats
 // modal and restart the game
-modalPlayAgain.addEventListener("click", function() {
+modalPlayAgain.addEventListener("click", () => {
   restartGame();
   displayModal(congratsModal, "none");
 });
 
 // When the user clicks anywhere outside of the congrats modal, close it
-window.addEventListener("click", function(event) {
+window.addEventListener("click", (event) => {
   (event.target === congratsModal) && displayModal(congratsModal, "none");
 });
 
