@@ -207,8 +207,17 @@ h1 {
   cursor: pointer;
 }
 
+.score-panel .restart:hover,
+.score-panel .restart:focus {
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  font-size: 30px;
+}
+
 #display-timer {
-  margin-left: 25px;
+  margin-left: 20px;
 }
 
 /* ---------------------- Congratulations Modal ---------------------- */
@@ -525,6 +534,17 @@ h1 {
   100% {
     background-position: 28px 0;
   }
+}
+
+/* Spin the restart button on hover/active state */
+
+@keyframes spin {
+    from {
+      transform:rotate(0deg);
+    }
+    to {
+      transform:rotate(360deg);
+    }
 }
 
 /* ---------------------- **************************** ---------------------- */

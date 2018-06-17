@@ -4,34 +4,24 @@
 
 let cards = [
   "fa-diamond",
-  "fa-diamond",
-  "fa-paper-plane-o",
   "fa-paper-plane-o",
   "fa-anchor",
-  "fa-anchor",
-  "fa-bolt",
   "fa-bolt",
   "fa-cube",
-  "fa-cube",
-  "fa-leaf",
   "fa-leaf",
   "fa-bicycle",
-  "fa-bicycle",
-  "fa-bomb",
   "fa-bomb"
 ];
 
+// double the cards (using spread syntax)
+cards = [...cards, ...cards];
+
 // Target all the DOM elements to work with
-// grab the deck
-let deck = document.querySelector("ul.deck");
-// get me the restart button
-let restart = document.querySelector("div.restart");
-// select span.moves to update the moves
-let moves = document.querySelector("span.moves");
-// select stars from score panel
-let stars = document.querySelector(".stars");
-// target the progress dialgoue
-let progModal = document.getElementById("progress-modal");
+let deck = document.querySelector("ul.deck"),
+    restart = document.querySelector("div.restart"),
+    moves = document.querySelector("span.moves"),
+    stars = document.querySelector(".stars"),
+    progModal = document.getElementById("progress-modal");
 
 /*
  * Display the cards on the page
@@ -202,9 +192,7 @@ function initGame() {
  * @param {event.target} card - The card type that was clicked on
  */
 function displayCard(card) {
-  if (card && card.nodeName === "LI") {
-    card.classList.add("open", "show", "disable");
-  }
+  (card && card.nodeName === "LI") && card.classList.add("open", "show", "disable");
 }
 
 /*
@@ -299,9 +287,7 @@ function updateMoves(target) {
     moves.textContent = "";
     moves.textContent = moveCounter;
   }
-  if (moveCounter === 1) {
-    timer.start();
-  }
+  (moveCounter === 1) && timer.start();
   updateStars();
 }
 
@@ -373,9 +359,7 @@ modalPlayAgain.addEventListener("click", function() {
 
 // When the user clicks anywhere outside of the congrats modal, close it
 window.addEventListener("click", function(event) {
-  if (event.target === congratsModal) {
-    displayModal(congratsModal, "none");
-  }
+  (event.target === congratsModal) && displayModal(congratsModal, "none");
 });
 
 /*
