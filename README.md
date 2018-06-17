@@ -10,6 +10,7 @@ the cards on the deck as fast as possible.**
 * [Instructions] Original Project Instructions(#instructions)
 * How to play the game?
 * How to install the game?
+* Project Dependencies
 * How I built the Matching Game?
 
 ## Original Project Instructions
@@ -38,6 +39,11 @@ For specific, detailed instructions, look at the project instructions in the [Ud
 
 Terminal Command:
 `$ git clone https://github.com/Patel-Jenu-1991/fend-project-memory-game.git`
+
+## Project Dependencies
+
+Game Icons - Font Awesome
+Game Fonts - Coda | Monofett | Revalia (Google Fonts)
 
 ## How I built the Matching Game?
 
@@ -69,3 +75,4 @@ progress bar modal and using illegal query strings while importing google fonts.
 + Brunjo @ pexels.com for a variety of progress bar demos.
 + Subtle Patterns for the mobile/tab background texture.
 + References: Google, Stack Overflow, W3Schools, MDN, CSS Tricks, The David Walsh blog, W3 Documentation and the classroom lessons.
++ Last but not the least, project reviewers/mentors at Udacity for pointing out and helping me eliminate the notable bugs.
