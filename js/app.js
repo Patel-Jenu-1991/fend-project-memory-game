@@ -149,7 +149,6 @@ function gamePlay(target, openCards) {
         lockCards(openCards);
         emptyList(openCards);
       }, 300);
-      // updateMoves(target);
     } else {
       // unmatch openCards
       unmatch(openCards);
@@ -158,7 +157,6 @@ function gamePlay(target, openCards) {
         hideCards(openCards);
         emptyList(openCards);
       }, 300);
-      // updateMoves(target);
     }
     updateMoves(target);
   }
